@@ -5,10 +5,10 @@ import { Button } from "../ui/button";
 export default function NavBar() {
   return (
     <>
-      <div className="px-20 py-3 border-b-2 border-[#EOEOEO]">
-        <div className="w-[1280px] mx-auto flex items-center justify-between">
+      <div className="mx-20">
+        <div className="my-5 flex items-center justify-between">
           <NavLink to="/">
-            <img className="w-[140px] h-[34px]" src={Rentyard} alt="" />
+            <img className="w-[140px] h-[38px]" src={Rentyard} alt="" />
           </NavLink>
           <Button variant="exit">Exit</Button>
         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -20,6 +21,8 @@ import {
   FormMessage,
 } from "../../../components/ui/form";
 import { Button } from "../../../components/ui/button";
+import { countryDialCodes } from "../../../components/Forms/countryDialCodes";
+import { useState, useEffect } from "react";
 
 interface LeasingInfoProps {
   onSubmitSuccess: (values: z.infer<typeof leasingInfoSchema>) => void;
@@ -27,7 +30,6 @@ interface LeasingInfoProps {
   initialValues?: z.infer<typeof leasingInfoSchema>;
 }
 
-// Leasing Info schema
 const leasingInfoSchema = z.object({
   managerName: z.string().min(1, "Manager name is required"),
   phoneCode: z.string().min(1, "Phone code is required"),
@@ -41,16 +43,63 @@ export const LeasingInfo = ({
   onClose,
   initialValues,
 }: LeasingInfoProps) => {
+  const defaultCountry = countryDialCodes.find((c) => c.code === "BD");
+  const defaultPhoneCode = defaultCountry?.dialCode || "+880";
+
   const form = useForm<z.infer<typeof leasingInfoSchema>>({
     resolver: zodResolver(leasingInfoSchema),
     defaultValues: initialValues || {
       managerName: "",
-      phoneCode: "+880",
-      phoneNumber: "",
+      phoneCode: defaultPhoneCode,
+      phoneNumber: defaultPhoneCode,
       contactEmail: "",
       sameAsProperty: false,
     },
   });
+
+  const [countryCode, setCountryCode] = useState(defaultPhoneCode);
+  const [phoneInputValue, setPhoneInputValue] = useState(defaultPhoneCode);
+
+  useEffect(() => {
+    if (initialValues?.phoneNumber) {
+      // Extract country code from initial phone number if exists
+      const foundCountry = countryDialCodes.find((c) =>
+        initialValues.phoneNumber.startsWith(c.dialCode)
+      );
+      if (foundCountry) {
+        setCountryCode(foundCountry.dialCode);
+        setPhoneInputValue(initialValues.phoneNumber);
+      }
+    }
+  }, [initialValues]);
+
+  const handleCountryChange = (value: string) => {
+    setCountryCode(value);
+    form.setValue("phoneCode", value);
+    // Update the input field with the new country code
+    const phoneNumberWithoutCode = phoneInputValue.replace(/^\+\d+/, "");
+    const newPhoneValue = value + phoneNumberWithoutCode;
+    setPhoneInputValue(newPhoneValue);
+    form.setValue("phoneNumber", newPhoneValue, { shouldValidate: true });
+  };
+
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    // If user tries to delete the country code, prevent it
+    if (inputValue.length < countryCode.length) {
+      return;
+    }
+
+    // If user starts typing without country code, add it
+    let newValue = inputValue;
+    if (!inputValue.startsWith(countryCode)) {
+      newValue = countryCode + inputValue.replace(/^\+\d+/, "");
+    }
+
+    setPhoneInputValue(newValue);
+    form.setValue("phoneNumber", newValue, { shouldValidate: true });
+  };
 
   function onSubmit(values: z.infer<typeof leasingInfoSchema>) {
     onSubmitSuccess(values);
@@ -83,76 +132,52 @@ export const LeasingInfo = ({
           <FormField
             control={form.control}
             name="phoneNumber"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel className="block text-sm font-medium text-gray-700 mb-2">
                   Leasing manager Phone number*
                 </FormLabel>
-                <div className="flex items-center border border-gray-300 rounded-md overflow-hidden w-full bg-white h-8">
-                  <FormField
-                    control={form.control}
-                    name="phoneCode"
-                    render={({ field }) => (
-                      <FormControl>
-                        <Select
-                          value={field.value}
-                          onValueChange={field.onChange}
-                        >
-                          <SelectTrigger className="flex items-center justify-between px-2 w-[90px] h-full text-sm bg-white border-none rounded-none focus:ring-0 focus:outline-none focus-visible:ring-0">
-                            <SelectValue placeholder="Code" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="+880">
+                <FormControl>
+                  <div className="flex items-center border rounded-md overflow-hidden w-full bg-white h-12">
+                    <Select
+                      value={countryCode}
+                      onValueChange={handleCountryChange}
+                    >
+                      <SelectTrigger className="flex items-center justify-between px-3 w-[80px] h-full text-sm bg-white border-none rounded-none focus:ring-0 focus:outline-none focus-visible:ring-0 cursor-pointer">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="w-[310px] z-50 max-h-[190px] overflow-auto">
+                        {countryDialCodes.map((country) => (
+                          <SelectItem
+                            key={country.dialCode}
+                            value={country.dialCode}
+                            className="cursor-pointer"
+                          >
+                            <div className="flex items-center justify-between gap-2 w-full cursor-pointer">
                               <div className="flex items-center gap-2">
                                 <Flag
-                                  code="BD"
+                                  code={country.code}
                                   style={{ width: 24, height: 16 }}
                                 />
+                                <span>{country.name}</span>
                               </div>
-                            </SelectItem>
-                            <SelectItem value="+970">
-                              <div className="flex items-center gap-2">
-                                <Flag
-                                  code="PS"
-                                  style={{ width: 24, height: 16 }}
-                                />
-                              </div>
-                            </SelectItem>
-                            <SelectItem value="+98">
-                              <div className="flex items-center gap-2">
-                                <Flag
-                                  code="IR"
-                                  style={{ width: 24, height: 16 }}
-                                />
-                              </div>
-                            </SelectItem>
-                            <SelectItem value="+964">
-                              <div className="flex items-center gap-2">
-                                <Flag
-                                  code="IQ"
-                                  style={{ width: 24, height: 16 }}
-                                />
-                              </div>
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                    )}
-                  />
-
-                  {/* Divider */}
-                  <div className="h-8 w-px bg-gray-300" />
-
-                  {/* Phone Number Input */}
-                  <FormControl>
-                    <input
+                              <span className="text-gray-500">
+                                {country.dialCode}
+                              </span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <div className="h-full w-px bg-gray-200" />
+                    <Input
                       type="tel"
-                      placeholder={form.watch("phoneCode")}
-                      className="flex-1 px-3 text-sm h-full bg-white focus:outline-none"
-                      {...field}
+                      className="flex-1 border-0 focus-visible:ring-0 px-3 text-sm"
+                      value={phoneInputValue}
+                      onChange={handlePhoneNumberChange}
                     />
-                  </FormControl>
-                </div>
+                  </div>
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

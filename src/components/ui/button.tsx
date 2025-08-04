@@ -21,12 +21,13 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline cursor-pointer",
         getStarted:
           "bg-blue-600 text-white shadow-xs hover:bg-blue-600 cursor-pointer",
+        next: "bg-blue-600 text-white shadow-xs hover:bg-blue-600 cursor-pointer",
         add: "bg-blue-600 text-white shadow-xs hover:bg-blue-600 cursor-pointer",
-        exit: " border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/10 cursor-pointer",
+        exit: " border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/10 cursor-pointer rounded-lg text-[16px]",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+        default: "h-9 px-6 py-6 has-[>svg]:px-3",
+        sm: "h-9 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
       },

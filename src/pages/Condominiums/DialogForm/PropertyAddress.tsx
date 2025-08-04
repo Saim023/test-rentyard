@@ -19,6 +19,11 @@ import {
   FormMessage,
 } from "../../../components/ui/form";
 import { Button } from "../../../components/ui/button";
+import {
+  countryDialCodes,
+  statesByCountry,
+} from "../../../components/Forms/countryDialCodes";
+import { useState } from "react";
 
 const propertyAddressSchema = z.object({
   propertyName: z.string().min(1, "Property name is required"),
@@ -57,6 +62,17 @@ export const PropertyAddress = ({
       zipCode: "",
     },
   });
+
+  const [selectedCountry, setSelectedCountry] = useState("");
+
+  const handleCountryChange = (value: string) => {
+    const country = countryDialCodes.find((c) => c.dialCode === value);
+    if (country) {
+      setSelectedCountry(country.code);
+      form.setValue("country", country.name, { shouldValidate: true });
+    }
+    form.setValue("state", "", { shouldValidate: true });
+  };
 
   function onSubmit(values: z.infer<typeof propertyAddressSchema>) {
     onSubmitSuccess(values);
@@ -121,28 +137,39 @@ export const PropertyAddress = ({
           <FormField
             control={form.control}
             name="country"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel className="mb-2">Country/Region*</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select
+                  onValueChange={handleCountryChange}
+                  value={
+                    countryDialCodes.find((c) => c.code === selectedCountry)
+                      ?.dialCode || ""
+                  }
+                >
                   <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Choose country" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Bangladesh">
-                      <Flag code="BD" style={{ width: 24, height: 16 }} />
-                      Bangladesh
-                    </SelectItem>
-                    <SelectItem value="Palestine">
-                      <Flag code="PS" style={{ width: 24, height: 16 }} />
-                      Palestine
-                    </SelectItem>
-                    <SelectItem value="Iran">
-                      <Flag code="IR" style={{ width: 24, height: 16 }} />
-                      Iran
-                    </SelectItem>
+                  <SelectContent className="w-[310px] z-50 max-h-[190px] overflow-auto">
+                    {countryDialCodes.map((country) => (
+                      <SelectItem
+                        key={country.dialCode}
+                        value={country.dialCode}
+                        className="cursor-pointer"
+                      >
+                        <div className="flex items-center justify-between gap-2 w-full cursor-pointer">
+                          <div className="flex items-center gap-2">
+                            <Flag
+                              code={country.code}
+                              style={{ width: 24, height: 16 }}
+                            />
+                            <span>{country.name}</span>
+                          </div>
+                        </div>
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -204,16 +231,46 @@ export const PropertyAddress = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="mb-2">State/Territory*</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  disabled={!selectedCountry}
+                >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Choose state" />
+                      <SelectValue
+                        placeholder={
+                          selectedCountry
+                            ? "Choose state/province"
+                            : "Select country first"
+                        }
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="Dhaka">Dhaka</SelectItem>
-                    <SelectItem value="Gaza">Gaza</SelectItem>
-                    <SelectItem value="Tehran">Tehran</SelectItem>
+                    {selectedCountry ? (
+                      statesByCountry[selectedCountry]?.length > 0 ? (
+                        <>
+                          {statesByCountry[selectedCountry].map((state) => (
+                            <SelectItem key={state} value={state}>
+                              {state}
+                            </SelectItem>
+                          ))}
+                        </>
+                      ) : (
+                        <SelectItem value="no-division" disabled>
+                          {selectedCountry === "SG"
+                            ? "City-state (no divisions)"
+                            : selectedCountry === "MC"
+                            ? "No regional divisions"
+                            : "No states/provinces defined"}
+                        </SelectItem>
+                      )
+                    ) : (
+                      <SelectItem value="select-country-first" disabled>
+                        Please select a country first
+                      </SelectItem>
+                    )}
                   </SelectContent>
                 </Select>
                 <FormMessage />
