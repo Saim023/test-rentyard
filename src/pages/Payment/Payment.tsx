@@ -107,20 +107,22 @@ export function Payment() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow mx-20">
+      <div className="flex-grow mx-4 md:mx-20">
         <div>
-          <h1 className="mt-14 mb-8 text-xl font-bold text-[#272B35]">
+          <h1 className="mt-8 md:mt-14 mb-6 md:mb-8 text-lg md:text-xl font-bold text-[#272B35]">
             Choose a plan for after 30-days free trial
           </h1>
 
-          <div className="mb-6 flex items-center gap-4">
+          <div className="mb-6 flex flex-wrap items-center gap-2 md:gap-4">
             <Button
+              className="w-full md:w-auto"
               variant={selectedPlan === "monthly" ? "add" : "outline"}
               onClick={() => setSelectedPlan("monthly")}
             >
               Monthly
             </Button>
             <Button
+              className="w-full md:w-auto"
               variant={selectedPlan === "annually" ? "add" : "outline"}
               onClick={() => setSelectedPlan("annually")}
             >
@@ -129,7 +131,7 @@ export function Payment() {
           </div>
         </div>
 
-        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mb-8 md:mb-12 grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-3">
           {plans.map((plan) => (
             <Card
               key={plan.name}
@@ -141,15 +143,17 @@ export function Payment() {
               onClick={() => setSelectedTier(plan.name)}
             >
               <CardHeader>
-                <CardTitle className="text-lg">{plan.name}</CardTitle>
+                <CardTitle className="text-md md:text-lg">
+                  {plan.name}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <h2 className="mb-2 text-2xl font-bold text-primary">
+                <h2 className="mb-2 text-xl md:text-2xl font-bold text-primary">
                   {selectedPlan === "monthly"
                     ? plan.monthlyPrice
                     : plan.annualPrice}
                 </h2>
-                <p className="mb-4 text-sm text-muted-foreground">
+                <p className="mb-4 text-xs md:text-sm text-muted-foreground">
                   {plan.description}
                 </p>
               </CardContent>
@@ -158,11 +162,13 @@ export function Payment() {
         </div>
 
         {selectedTier && (
-          <div className="rounded-lg border bg-card p-5 shadow-sm mb-[102px]">
-            <div className="flex items-center justify-between">
-              <h2 className="mb-6 text-xl font-semibold">Payment option</h2>
+          <div className="rounded-lg border bg-card p-4 md:p-5 shadow-sm mb-8 md:mb-[102px]">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+              <h2 className="mb-4 md:mb-6 text-lg md:text-xl font-semibold">
+                Payment option
+              </h2>
               <button
-                className="border-b border-blue-600 text-blue-600 cursor-pointer"
+                className="border-b border-blue-600 text-blue-600 cursor-pointer text-sm md:text-base pb-3 md:pb-0"
                 onClick={() => setIsDialogOpen(true)}
               >
                 Add new card
@@ -175,10 +181,11 @@ export function Payment() {
                   key={card.id}
                   className="py-2 hover:bg-gray-50 border-b border-b-gray-100"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                  <div className="grid grid-cols-2 gap-2 md:flex md:flex-row md:items-center md:justify-between">
+                    <div className="flex items-center gap-2 col-span-1 md:mb-0">
                       <CiCreditCard2 className="text-xl" />
-                      <h1>
+                      <h1 className="text-sm md:text-base truncate">
+                        {" "}
                         {card.name}
                         <span>({card.cardName})</span>{" "}
                         <span className="text-gray-800">
@@ -186,9 +193,10 @@ export function Payment() {
                         </span>
                       </h1>
                     </div>
-                    <div>
+                    <div className="col-span-1 flex justify-end">
+                      {" "}
                       <Button
-                        className={`w-[88px] h-[40px] radius-[12px] px-5 py-2.5 text-[16px] font-semibold ${
+                        className={`w-[88px] h-[40px] rounded-[12px] px-2 md:px-5 py-2.5 text-[14px] md:text-[16px] font-semibold ${
                           selectedCard === card.id
                             ? "text-white"
                             : "text-blue-500"
@@ -207,7 +215,7 @@ export function Payment() {
         )}
 
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="sm:max-w-[650px] w-full p-0 overflow-hidden">
+          <DialogContent className="w-[95%] sm:max-w-[650px] p-0 overflow-hidden">
             <DialogHeader className="bg-[#F4F4F4] py-4 px-5">
               <DialogTitle>Add new card</DialogTitle>
             </DialogHeader>
@@ -220,17 +228,17 @@ export function Payment() {
       </div>
 
       {/* Navigation */}
-      <div className="h-24 border-t-[1px] border-t-[#E0E0E0] bg-white top-shadow">
-        <div className="mx-20 h-full">
+      <div className="h-20 md:h-24 border-t-[1px] border-t-[#E0E0E0] bg-white top-shadow">
+        <div className="mx-4 md:mx-20 h-full">
           <div className="flex items-center justify-between h-full">
             <NavLink
               to="/condominiums"
-              className="font-semibold border-b-2 border-[#E0E0E0]"
+              className="font-semibold border-b-2 border-[#E0E0E0] text-sm md:text-base"
             >
               Back
             </NavLink>
             <Button
-              className="w-[188px] h-[47px] rounded-[12px] text-[16px] font-semibold px-6 py-3"
+              className="w-[150px] md:w-[188px] h-[40px] md:h-[47px] rounded-[12px] text-[14px] md:text-[16px] font-semibold px-4 md:px-6 py-2 md:py-3"
               variant="next"
               onClick={handlePayAndAddProperty}
             >

@@ -47,15 +47,15 @@ export const PaymentCardForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="p-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 md:p-5">
+        <div className="grid grid-cols-1 gap-4">
           {/* Name on card */}
           <FormField
             control={form.control}
             name="cardHolder"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="block text-sm font-medium text-gray-700 mb-2">
+                <FormLabel className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
                   Name on card
                 </FormLabel>
                 <FormControl>
@@ -72,7 +72,7 @@ export const PaymentCardForm = ({
             name="cardNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="block text-sm font-medium text-gray-700 mb-2">
+                <FormLabel className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
                   Card number
                 </FormLabel>
                 <FormControl>
@@ -84,42 +84,48 @@ export const PaymentCardForm = ({
           />
 
           {/* Expire date */}
-          <FormField
-            control={form.control}
-            name="expireDate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="block text-sm font-medium text-gray-700 mb-2">
-                  Expire date
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="MM/YY" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          {/* CVC*/}
-          <FormField
-            control={form.control}
-            name="cvc"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="block text-sm font-medium text-gray-700 mb-2">
-                  CVC
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="123" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="expireDate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
+                    Expire date
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="MM/YY" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* CVC*/}
+            <FormField
+              control={form.control}
+              name="cvc"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
+                    CVC
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="123" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
 
-        <div className="flex justify-end gap-3 pt-6">
-          <Button type="submit" variant="add" className="px-6">
+        <div className="flex justify-end gap-3 pt-4 md:pt-6">
+          <Button
+            type="submit"
+            variant="add"
+            className="px-4 md:px-6 text-sm md:text-base"
+          >
             {initialValues ? "Update" : "Save"}
           </Button>
         </div>

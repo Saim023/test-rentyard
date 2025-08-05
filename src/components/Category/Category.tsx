@@ -85,19 +85,19 @@ export default function Category() {
   };
 
   const cardBaseStyle =
-    "border-2 rounded-[12px] p-5 cursor-pointer transition duration-200";
+    "border-2 rounded-[12px] p-4 sm:p-5 cursor-pointer transition duration-200";
   const selectedStyle = "border-blue-600 bg-blue-50";
   const unselectedStyle = "border-[#E0E0E0] hover:border-blue-400";
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow mx-20 pb-20">
+      <div className="flex-grow mx-4 sm:mx-6 md:mx-10 lg:mx-20 pb-16 sm:pb-20">
         {/* Property type */}
         <div>
-          <h1 className="text-2xl font-semibold text-[#393f4e] mt-10 mb-6">
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#393f4e] mt-6 sm:mt-10 mb-4 sm:mb-6">
             Property type
           </h1>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <div
               onClick={() => handlePropertyClick("single")}
               className={`${cardBaseStyle} ${
@@ -106,11 +106,12 @@ export default function Category() {
             >
               <div className="flex items-center gap-3">
                 <svg
-                  width="56"
-                  height="56"
+                  width="48"
+                  height="48"
                   viewBox="0 0 56 56"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 sm:w-14 sm:h-14"
                 >
                   <path
                     d="M0 8C0 3.58172 3.58172 0 8 0H48C52.4183 0 56 3.58172 56 8V48C56 52.4183 52.4183 56 48 56H8C3.58172 56 0 52.4183 0 48V8Z"
@@ -129,10 +130,10 @@ export default function Category() {
                   />
                 </svg>
                 <div>
-                  <h1 className="text-[16px] font-semibold text-[#272B35]">
+                  <h1 className="text-sm sm:text-[16px] font-semibold text-[#272B35]">
                     Single House Property
                   </h1>
-                  <p className="text-[14px] font-medium mt-1.5 text-[#777980]">
+                  <p className="text-xs sm:text-[14px] font-medium mt-1 text-[#777980]">
                     Single unit house for single family
                   </p>
                 </div>
@@ -147,11 +148,12 @@ export default function Category() {
             >
               <div className="flex items-center gap-3">
                 <svg
-                  width="57"
-                  height="56"
+                  width="48"
+                  height="48"
                   viewBox="0 0 57 56"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 sm:w-14 sm:h-14"
                 >
                   <rect
                     x="0.666748"
@@ -218,10 +220,10 @@ export default function Category() {
                   />
                 </svg>
                 <div>
-                  <h1 className="text-[16px] font-semibold text-[#272B35]">
+                  <h1 className="text-sm sm:text-[16px] font-semibold text-[#272B35]">
                     Apartments complex
                   </h1>
-                  <p className="text-[14px] font-medium mt-1.5 text-[#777980]">
+                  <p className="text-xs sm:text-[14px] font-medium mt-1 text-[#777980]">
                     Multiple unit house for families
                   </p>
                 </div>
@@ -236,11 +238,12 @@ export default function Category() {
             >
               <div className="flex items-center gap-3">
                 <svg
-                  width="57"
-                  height="56"
+                  width="48"
+                  height="48"
                   viewBox="0 0 57 56"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 sm:w-14 sm:h-14"
                 >
                   <path
                     d="M0.333496 8C0.333496 3.58172 3.91522 0 8.3335 0H48.3335C52.7518 0 56.3335 3.58172 56.3335 8V48C56.3335 52.4183 52.7518 56 48.3335 56H8.3335C3.91522 56 0.333496 52.4183 0.333496 48V8Z"
@@ -273,10 +276,10 @@ export default function Category() {
                   />
                 </svg>
                 <div>
-                  <h1 className="text-[16px] font-semibold text-[#272B35]">
+                  <h1 className="text-sm sm:text-[16px] font-semibold text-[#272B35]">
                     Condominiums
                   </h1>
-                  <p className="text-[14px] font-medium mt-1.5 text-[#777980]">
+                  <p className="text-xs sm:text-[14px] font-medium mt-1 text-[#777980]">
                     Multiple unit house for families
                   </p>
                 </div>
@@ -286,11 +289,11 @@ export default function Category() {
         </div>
 
         {/* Select your role */}
-        <div className="mt-8">
-          <h1 className="text-2xl font-semibold text-[#393f4e] mb-6">
+        <div className="mt-6 sm:mt-8">
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#393f4e] mb-4 sm:mb-6">
             Select your role
           </h1>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <div
               onClick={() => {
                 handleRoleClick("landlord");
@@ -303,11 +306,12 @@ export default function Category() {
             >
               <div className="flex items-center gap-3">
                 <svg
-                  width="56"
-                  height="56"
+                  width="48"
+                  height="48"
                   viewBox="0 0 56 56"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 sm:w-14 sm:h-14"
                 >
                   <path
                     d="M0 8C0 3.58172 3.58172 0 8 0H48C52.4183 0 56 3.58172 56 8V48C56 52.4183 52.4183 56 48 56H8C3.58172 56 0 52.4183 0 48V8Z"
@@ -336,10 +340,10 @@ export default function Category() {
                   />
                 </svg>
                 <div>
-                  <h1 className="text-[16px] font-semibold text-[#272B35]">
+                  <h1 className="text-sm sm:text-[16px] font-semibold text-[#272B35]">
                     Landlord
                   </h1>
-                  <p className="text-[14px] font-medium mt-1.5 text-[#777980]">
+                  <p className="text-xs sm:text-[14px] font-medium mt-1 text-[#777980]">
                     Owner of the property
                   </p>
                 </div>
@@ -356,11 +360,12 @@ export default function Category() {
             >
               <div className="flex items-center gap-3">
                 <svg
-                  width="57"
-                  height="56"
+                  width="48"
+                  height="48"
                   viewBox="0 0 57 56"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 sm:w-14 sm:h-14"
                 >
                   <path
                     d="M0.666748 8C0.666748 3.58172 4.24847 0 8.66675 0H48.6667C53.085 0 56.6667 3.58172 56.6667 8V48C56.6667 52.4183 53.085 56 48.6667 56H8.66675C4.24847 56 0.666748 52.4183 0.666748 48V8Z"
@@ -389,10 +394,10 @@ export default function Category() {
                   />
                 </svg>
                 <div>
-                  <h1 className="text-[16px] font-semibold text-[#272B35]">
+                  <h1 className="text-sm sm:text-[16px] font-semibold text-[#272B35]">
                     Realtor
                   </h1>
-                  <p className="text-[14px] font-medium mt-1.5 text-[#777980]">
+                  <p className="text-xs sm:text-[14px] font-medium mt-1 text-[#777980]">
                     Manage property on behalf on owner
                   </p>
                 </div>
@@ -409,11 +414,12 @@ export default function Category() {
             >
               <div className="flex items-center gap-3">
                 <svg
-                  width="57"
-                  height="56"
+                  width="48"
+                  height="48"
                   viewBox="0 0 57 56"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 sm:w-14 sm:h-14"
                 >
                   <path
                     d="M0.333496 8C0.333496 3.58172 3.91522 0 8.3335 0H48.3335C52.7518 0 56.3335 3.58172 56.3335 8V48C56.3335 52.4183 52.7518 56 48.3335 56H8.3335C3.91522 56 0.333496 52.4183 0.333496 48V8Z"
@@ -446,10 +452,10 @@ export default function Category() {
                   />
                 </svg>
                 <div>
-                  <h1 className="text-[16px] font-semibold text-[#272B35]">
+                  <h1 className="text-sm sm:text-[16px] font-semibold text-[#272B35]">
                     Property management company
                   </h1>
-                  <p className="text-[14px] font-medium mt-1.5 text-[#777980]">
+                  <p className="text-xs sm:text-[14px] font-medium mt-1 text-[#777980]">
                     For management company
                   </p>
                 </div>
@@ -462,9 +468,9 @@ export default function Category() {
         <div>
           {selectedPropertyType && selectedRole && (
             <div>
-              <div className="mt-8 border rounded-xl overflow-hidden">
+              <div className="mt-6 sm:mt-8 border rounded-xl overflow-hidden">
                 <div className="bg-[#F4F4F4] px-4 py-3.5">
-                  <h2 className="text-lg font-medium text-[#6F6C6A] m-0">
+                  <h2 className="text-base sm:text-lg font-medium text-[#6F6C6A] m-0">
                     {selectedRole === "landlord"
                       ? "Proof of ownership"
                       : selectedRole === "realtor"
@@ -485,13 +491,16 @@ export default function Category() {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-2 mt-7">
+              <div className="flex items-center space-x-2 mt-5 sm:mt-7">
                 <Checkbox
                   id="terms"
                   checked={termsAccepted}
                   onCheckedChange={(checked) => setTermsAccepted(!!checked)}
                 />
-                <Label className="text-[#393f4e]" htmlFor="terms">
+                <Label
+                  className="text-sm sm:text-base text-[#393f4e]"
+                  htmlFor="terms"
+                >
                   Accept RentYard property adding terms & condition
                 </Label>
               </div>
@@ -501,17 +510,17 @@ export default function Category() {
       </div>
 
       {/* Navigation */}
-      <div className="h-24 border-t-[1px] border-t-[#E0E0E0] bg-white top-shadow">
-        <div className="mx-20 h-full">
+      <div className="h-20 sm:h-24 border-t-[1px] border-t-[#E0E0E0] bg-white top-shadow">
+        <div className="mx-4 sm:mx-6 md:mx-10 lg:mx-20 h-full">
           <div className="flex items-center justify-between h-full">
             <NavLink
               to="/"
-              className="font-semibold border-b-2 border-[#E0E0E0]"
+              className="text-sm sm:text-base font-semibold border-b-2 border-[#E0E0E0]"
             >
               Back
             </NavLink>
             <Button
-              className="h-[47px] py-2"
+              className="h-10 sm:h-[47px] py-2 text-sm sm:text-base"
               variant="getStarted"
               disabled={!selectedPropertyType || !selectedRole}
               onClick={handleGetStarted}

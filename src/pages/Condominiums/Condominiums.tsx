@@ -242,23 +242,27 @@ export default function PropertyForm() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow mx-20">
+      <div className="flex-grow mx-4 md:mx-20">
         <div className="pb-5">
-          <h1 className="mt-10 mb-8 font-bold text-2xl">
+          <h1 className="mt-6 md:mt-10 mb-6 md:mb-8 font-bold text-xl md:text-2xl">
             Condominiums information
           </h1>
-          <div className="flex gap-4 py-2">
+          <div className="flex flex-col md:flex-row gap-4 py-2">
             {/* First column */}
-            <div className="w-1/2 flex flex-col gap-4">
+            <div className="w-full md:w-1/2 flex flex-col gap-4">
               {firstColumnFields.map((field, index) => (
                 <div key={index}>
-                  <div className="w-full p-5 border border-gray-300 rounded-[20px] text-sm">
+                  <div className="w-full p-4 md:p-5 border border-gray-300 rounded-[20px] text-sm">
                     <div className="flex items-center justify-between">
-                      <h1 className="py-1.5 text-[18px] text-[#272B35] font-semibold">
+                      <h1 className="py-1.5 text-base md:text-[18px] text-[#272B35] font-semibold">
                         {field.label}
-                        <span className="text-[#6F6C6A]">{field.optional}</span>
+                        <span className="text-[#6F6C6A] text-sm md:text-base">
+                          {field.optional}
+                        </span>
                         {field.required && (
-                          <span className="text-red-500">(Required)</span>
+                          <span className="text-red-500 text-sm md:text-base">
+                            (Required)
+                          </span>
                         )}
                       </h1>
                       <div
@@ -269,7 +273,7 @@ export default function PropertyForm() {
                         }}
                       >
                         <Plus className="h-4 w-4 text-blue-700" />
-                        <span className="text-blue-700 text-[16px] font-semibold border-b-[1px] border-[#9db4e9]">
+                        <span className="text-blue-700 text-sm md:text-[16px] font-semibold border-b-[1px] border-[#9db4e9]">
                           Add
                         </span>
                       </div>
@@ -557,20 +561,22 @@ export default function PropertyForm() {
             </div>
 
             {/* Second column */}
-            <div className="w-1/2 flex flex-col gap-4">
+            <div className="w-full md:w-1/2 flex flex-col gap-4">
               {secondColumnFields.map((field, index) => {
                 const originalIndex = index + firstColumnFields.length;
                 return (
                   <div key={originalIndex}>
-                    <div className="w-full p-5 border border-gray-300 rounded-[20px] text-sm">
+                    <div className="w-full p-4 md:p-5 border border-gray-300 rounded-[20px] text-sm">
                       <div className="flex items-center justify-between">
-                        <h1 className="py-1.5 text-[18px] text-[#272B35] font-semibold">
+                        <h1 className="py-1.5 text-base md:text-[18px] text-[#272B35] font-semibold">
                           {field.label}
-                          <span className="text-[#6F6C6A]">
+                          <span className="text-[#6F6C6A] text-sm md:text-base">
                             {field.optional}
                           </span>
                           {field.required && (
-                            <span className="text-red-500">(Required)</span>
+                            <span className="text-red-500 text-sm md:text-base">
+                              (Required)
+                            </span>
                           )}
                         </h1>
                         <div
@@ -581,7 +587,7 @@ export default function PropertyForm() {
                           }}
                         >
                           <Plus className="h-4 w-4 text-blue-700" />
-                          <span className="text-blue-700 text-[16px] font-semibold border-b-[1px] border-[#9db4e9]">
+                          <span className="text-blue-700 text-sm md:text-[16px] font-semibold border-b-[1px] border-[#9db4e9]">
                             Add
                           </span>
                         </div>
@@ -1142,29 +1148,33 @@ export default function PropertyForm() {
         </Dialog>
 
         {/* Property gallery */}
-        <div className=" mt-4 border border-gray-300 rounded-lg">
-          <div className="p-5 border-b border-b-gray-300">
-            <h1 className="font-semibold text-[18px]">
+        <div className="mt-4 border border-gray-300 rounded-lg">
+          <div className="p-4 md:p-5 border-b border-b-gray-300">
+            <h1 className="font-semibold text-base md:text-[18px]">
               Property gallery
-              <span className="text-[#6F6C6A]">(Its not unit photo)*</span>
+              <span className="text-[#6F6C6A] text-sm md:text-base">
+                (Its not unit photo)*
+              </span>
             </h1>
           </div>
           <div>
-            <div className="flex items-center content-center p-5 gap-8">
-              <div>
-                <h1 className="mt-5 mb-2.5 text-lg font-semibold">
+            <div className="flex flex-col md:flex-row items-center content-center p-4 md:p-5 gap-4 md:gap-8">
+              <div className="w-full">
+                <h1 className="mt-3 md:mt-5 mb-2 text-base md:text-lg font-semibold">
                   Featured photos<span className="text-red-600">*</span>
                 </h1>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex justify-center items-center bg-[#F6F9FF]">
                     <div
-                      className="w-full h-full flex flex-col items-center justify-center border border-dashed border-blue-500 p-5 rounded-lg cursor-pointer"
+                      className="w-full h-full flex flex-col items-center justify-center border border-dashed border-blue-500 p-4 md:p-5 rounded-lg cursor-pointer"
                       onClick={handleSingleUploadClick}
                     >
-                      <div className="w-11 h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
-                        <Upload className="h-5 w-5" />
+                      <div className="w-10 h-10 md:w-11 md:h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
+                        <Upload className="h-4 w-4 md:h-5 md:w-5" />
                       </div>
-                      <h1 className="mt-0.5">Upload cover photo</h1>
+                      <h1 className="mt-0.5 text-sm md:text-base">
+                        Upload cover photo
+                      </h1>
                       <p className="text-xs">(Jpg, png only)</p>
                       <input
                         ref={coverPhotoRef}
@@ -1179,13 +1189,13 @@ export default function PropertyForm() {
                     {[...Array(4)].map((_, index) => (
                       <div
                         key={index}
-                        className="border border-dashed border-blue-500 px-8 py-4 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
+                        className="border border-dashed border-blue-500 px-4 py-3 md:px-8 md:py-4 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
                         onClick={() =>
                           handleMultiUploadClick(index, featuredPhotoRefs)
                         }
                       >
-                        <div className="w-11 h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
-                          <Upload className="h-5 w-5" />
+                        <div className="w-10 h-10 md:w-11 md:h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
+                          <Upload className="h-4 w-4 md:h-5 md:w-5" />
                         </div>
                         <input
                           type="file"
@@ -1205,21 +1215,24 @@ export default function PropertyForm() {
                   </div>
                 </div>
               </div>
-              <div>
-                <h1 className="mt-5 mb-2.5 text-lg font-semibold">
-                  More photos<span className="text-[#6F6C6A]">(optional)</span>
+              <div className="w-full mt-4 md:mt-0">
+                <h1 className="mt-3 md:mt-5 mb-2 text-base md:text-lg font-semibold">
+                  More photos
+                  <span className="text-[#6F6C6A] text-sm md:text-base">
+                    (optional)
+                  </span>
                 </h1>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[...Array(8)].map((_, index) => (
                     <div
                       key={index}
-                      className="border border-dashed border-blue-500 px-8 py-4 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
+                      className="border border-dashed border-blue-500 px-4 py-3 md:px-8 md:py-4 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
                       onClick={() =>
                         handleMultiUploadClick(index, morePhotoRefs)
                       }
                     >
-                      <div className="w-11 h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
-                        <Upload className="h-5 w-5" />
+                      <div className="w-10 h-10 md:w-11 md:h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
+                        <Upload className="h-4 w-4 md:h-5 md:w-5" />
                       </div>
                       <input
                         type="file"
@@ -1243,119 +1256,130 @@ export default function PropertyForm() {
         </div>
 
         {/* Accordion */}
-        <div className="mt-6 mb-16 border border-gray-300 rounded-lg">
+        <div className="mt-6 mb-12 md:mb-16 border border-gray-300 rounded-lg">
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
-              <AccordionTrigger className="flex justify-between items-center cursor-pointer bg-[#F6F9FF] p-5 [&[data-state=open]]:no-underline hover:no-underline ">
-                <h1 className=" text-[18px] rounded-[20px] font-medium">
-                  Videos<span className="text-[#6F6C6A]">(optional)</span>
+              <AccordionTrigger className="flex justify-between items-center cursor-pointer bg-[#F6F9FF] p-4 md:p-5 [&[data-state=open]]:no-underline hover:no-underline ">
+                <h1 className="text-base md:text-[18px] rounded-[20px] font-medium">
+                  Videos
+                  <span className="text-[#6F6C6A] text-sm md:text-base">
+                    (optional)
+                  </span>
                 </h1>
               </AccordionTrigger>
               <AccordionContent className="border-t border-t-gray-300 px-3 pt-3">
                 <div>
-                  <div className="flex flex-start gap-12">
-                    <div className="p-5">
-                      <div className="flex flex-start gap-12">
-                        {/* Property Video Upload */}
-                        <div>
-                          <h1 className="pb-2 text-[16px] font-semibold">
-                            Property Video{" "}
-                            <span className="text-[#6F6C6A]">(optional)</span>
-                          </h1>
-                          <div
-                            className="border border-dashed border-blue-500 px-6 py-6 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
-                            onClick={() => propertyVideoRef.current?.click()}
-                          >
-                            <div className="flex flex-col items-center">
-                              <div className="w-11 h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
-                                <Upload className="h-5 w-5" />
-                              </div>
-                              <h1 className="mt-1">Upload video</h1>
-                              <p className="text-xs text-gray-600">
-                                (MP4, MOV only)
-                              </p>
-                              {propertyVideo && (
-                                <p className="text-xs text-gray-600 mt-1 truncate max-w-[120px]">
-                                  {propertyVideo.name}
-                                </p>
-                              )}
-                              <input
-                                type="file"
-                                ref={propertyVideoRef}
-                                accept="video/mp4,video/quicktime"
-                                onChange={handlePropertyVideoChange}
-                                className="hidden"
-                              />
-                            </div>
+                  <div className="flex flex-col md:flex-row gap-4 md:gap-12">
+                    {/* Property Video Upload */}
+                    <div className="p-3 md:p-5">
+                      <h1 className="pb-2 text-sm md:text-[16px] font-semibold">
+                        Property Video{" "}
+                        <span className="text-[#6F6C6A] text-sm">
+                          (optional)
+                        </span>
+                      </h1>
+                      <div
+                        className="border border-dashed border-blue-500 px-4 py-4 md:px-6 md:py-6 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
+                        onClick={() => propertyVideoRef.current?.click()}
+                      >
+                        <div className="flex flex-col items-center">
+                          <div className="w-10 h-10 md:w-11 md:h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
+                            <Upload className="h-4 w-4 md:h-5 md:w-5" />
                           </div>
+                          <h1 className="mt-1 text-sm md:text-base">
+                            Upload video
+                          </h1>
+                          <p className="text-xs text-gray-600">
+                            (MP4, MOV only)
+                          </p>
+                          {propertyVideo && (
+                            <p className="text-xs text-gray-600 mt-1 truncate max-w-[120px]">
+                              {propertyVideo.name}
+                            </p>
+                          )}
+                          <input
+                            type="file"
+                            ref={propertyVideoRef}
+                            accept="video/mp4,video/quicktime"
+                            onChange={handlePropertyVideoChange}
+                            className="hidden"
+                          />
                         </div>
+                      </div>
+                    </div>
 
-                        {/* Virtual Tour Upload */}
-                        <div>
-                          <h1 className="pb-2 text-[16px] font-semibold">
-                            Property virtual tour
-                            <span className="text-[#6F6C6A]">(optional)</span>
-                          </h1>
-                          <div
-                            className="border border-dashed border-blue-500 px-6 py-6 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
-                            onClick={() => virtualTourRef.current?.click()}
-                          >
-                            <div className="flex flex-col items-center">
-                              <div className="w-11 h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
-                                <Upload className="h-5 w-5" />
-                              </div>
-                              <h1 className="mt-1">Upload video</h1>
-                              <p className="text-xs text-gray-600">
-                                (MP4, MOV only)
-                              </p>
-                              {virtualTour && (
-                                <p className="text-xs text-gray-600 mt-1 truncate max-w-[120px]">
-                                  {virtualTour.name}
-                                </p>
-                              )}
-                              <input
-                                type="file"
-                                ref={virtualTourRef}
-                                accept="video/mp4,video/quicktime"
-                                onChange={handleVirtualTourChange}
-                                className="hidden"
-                              />
-                            </div>
+                    {/* Virtual Tour Upload */}
+                    <div className="p-3 md:p-5">
+                      <h1 className="pb-2 text-sm md:text-[16px] font-semibold">
+                        Property virtual tour
+                        <span className="text-[#6F6C6A] text-sm">
+                          (optional)
+                        </span>
+                      </h1>
+                      <div
+                        className="border border-dashed border-blue-500 px-4 py-4 md:px-6 md:py-6 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
+                        onClick={() => virtualTourRef.current?.click()}
+                      >
+                        <div className="flex flex-col items-center">
+                          <div className="w-10 h-10 md:w-11 md:h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
+                            <Upload className="h-4 w-4 md:h-5 md:w-5" />
                           </div>
+                          <h1 className="mt-1 text-sm md:text-base">
+                            Upload video
+                          </h1>
+                          <p className="text-xs text-gray-600">
+                            (MP4, MOV only)
+                          </p>
+                          {virtualTour && (
+                            <p className="text-xs text-gray-600 mt-1 truncate max-w-[120px]">
+                              {virtualTour.name}
+                            </p>
+                          )}
+                          <input
+                            type="file"
+                            ref={virtualTourRef}
+                            accept="video/mp4,video/quicktime"
+                            onChange={handleVirtualTourChange}
+                            className="hidden"
+                          />
                         </div>
+                      </div>
+                    </div>
 
-                        {/* Arial Video Upload */}
-                        <div>
-                          <h1 className="pb-2 text-[16px] font-semibold">
-                            Property arial video
-                            <span className="text-[#6F6C6A]">(optional)</span>
-                          </h1>
-                          <div
-                            className="border border-dashed border-blue-500 px-6 py-6 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
-                            onClick={() => arialVideoRef.current?.click()}
-                          >
-                            <div className="flex flex-col items-center">
-                              <div className="w-11 h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
-                                <Upload className="h-5 w-5" />
-                              </div>
-                              <h1 className="mt-1">Upload video</h1>
-                              <p className="text-xs text-gray-600">
-                                (MP4, MOV only)
-                              </p>
-                              {arialVideo && (
-                                <p className="text-xs text-gray-600 mt-1 truncate max-w-[120px]">
-                                  {arialVideo.name}
-                                </p>
-                              )}
-                              <input
-                                type="file"
-                                ref={arialVideoRef}
-                                accept="video/mp4,video/quicktime"
-                                onChange={handleArialVideoChange}
-                                className="hidden"
-                              />
-                            </div>
+                    {/* Arial Video Upload */}
+                    <div className="p-3 md:p-5">
+                      <h1 className="pb-2 text-sm md:text-[16px] font-semibold">
+                        Property arial video
+                        <span className="text-[#6F6C6A] text-sm">
+                          (optional)
+                        </span>
+                      </h1>
+                      <div
+                        className="border border-dashed border-blue-500 px-4 py-4 md:px-6 md:py-6 rounded-lg flex justify-center items-center bg-[#F6F9FF] cursor-pointer"
+                        onClick={() => arialVideoRef.current?.click()}
+                      >
+                        <div className="flex flex-col items-center">
+                          <div className="w-10 h-10 md:w-11 md:h-11 border border-dashed border-blue-500 p-2 rounded-lg flex justify-center items-center">
+                            <Upload className="h-4 w-4 md:h-5 md:w-5" />
                           </div>
+                          <h1 className="mt-1 text-sm md:text-base">
+                            Upload video
+                          </h1>
+                          <p className="text-xs text-gray-600">
+                            (MP4, MOV only)
+                          </p>
+                          {arialVideo && (
+                            <p className="text-xs text-gray-600 mt-1 truncate max-w-[120px]">
+                              {arialVideo.name}
+                            </p>
+                          )}
+                          <input
+                            type="file"
+                            ref={arialVideoRef}
+                            accept="video/mp4,video/quicktime"
+                            onChange={handleArialVideoChange}
+                            className="hidden"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1367,17 +1391,17 @@ export default function PropertyForm() {
         </div>
       </div>
       {/* Navigation */}
-      <div className="h-24 border-t-[1px] border-t-[#E0E0E0] bg-white top-shadow">
-        <div className="mx-20 h-full">
+      <div className="h-20 md:h-24 border-t-[1px] border-t-[#E0E0E0] bg-white top-shadow">
+        <div className="mx-4 md:mx-20 h-full">
           <div className="flex items-center justify-between h-full">
             <NavLink
               to="/"
-              className="font-semibold border-b-2 border-[#E0E0E0]"
+              className="font-semibold border-b-2 border-[#E0E0E0] text-sm md:text-base"
             >
               Back
             </NavLink>
             <Button
-              className="w-32 h-[47px] rounded-xl"
+              className="w-28 md:w-32 h-10 md:h-[47px] rounded-xl text-sm md:text-base"
               variant="next"
               onClick={() => {
                 if (validateRequiredFields()) {
