@@ -58,7 +58,10 @@ export const PetFees = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="p-5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="p-5 h-[400px] md:h-[auto] overflow-auto"
+      >
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Pet type */}
