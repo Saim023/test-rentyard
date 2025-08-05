@@ -82,9 +82,11 @@ export const PropertyAddress = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 px-5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 px-5 h-[400px] md:h-[auto] overflow-auto"
+      >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Property name as identifier */}
           <FormField
             control={form.control}
             name="propertyName"
